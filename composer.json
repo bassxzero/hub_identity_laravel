@@ -1,0 +1,32 @@
+{
+    "name": "bassxzero/hub_identity_laravel",
+    "description": "HubIdentity Support for Laravel 8.x",
+    "authors": [
+        {
+            "name": "Tyler Scott",
+            "email": "trs@g.clemson.edu"
+        }
+    ],
+    "require": {
+        "laravel/framework": "^8.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "HubIdentity\\": "src/HubIdentity"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+        }
+    },
+    "minimum-stability": "stable",
+    "require-dev": {
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "HubIdentity\\Providers\\HubIdentityServiceProvider"
+            ]
+        }
+    }
+}
