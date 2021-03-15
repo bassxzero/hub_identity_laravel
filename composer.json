@@ -18,8 +18,7 @@
     "autoload-dev": {
         "psr-4": {
         }
-    },
-    "minimum-stability": "stable",
+    },    
     "require-dev": {
     },
     "extra": {
