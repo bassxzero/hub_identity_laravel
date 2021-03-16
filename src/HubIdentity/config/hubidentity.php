@@ -10,6 +10,6 @@ return [
 
     'private_key' => env('HUBIDENTITY_PRIVATE'),
 
-    'redirect_url' => env('HUBIDENTITY_REDIRECT_URL'),
+    'redirect_url' => env('HUBIDENTITY_REDIRECT_URL', '/sessions/create'),
 
 ];

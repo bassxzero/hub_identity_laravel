@@ -30,7 +30,7 @@ class HubIdentityServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../config/hubidentity.php' => config_path('hubidentity.php'),
-        ]);
+        ], 'config');
 
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
 
@@ -43,7 +43,6 @@ class HubIdentityServiceProvider extends ServiceProvider
         });
 
         Auth::extend('hub-identity', function ($app, $name, array $config) {
-            // Return an instance of Illuminate\Contracts\Auth\Guard...
             return $app->make(
                 HubIdentityGuard::class,
                 [

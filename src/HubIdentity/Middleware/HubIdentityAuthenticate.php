@@ -40,7 +40,7 @@ class HubIdentityAuthenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            return env('HUBIDENTITY_URL') . '/browser/v1/providers?api_key='. env('HUBIDENTITY_PUBLIC');
+            return config('hubidentity.url') . '/browser/v1/providers?api_key='. config('hubidentity.public_key');
         }
     }
 }

@@ -46,13 +46,6 @@ class HubIdentityGuard implements Guard
     protected $lastAttempted;
 
     /**
-     * Indicates if the user was authenticated via a recaller cookie.
-     *
-     * @var bool
-     */
-    protected $viaRemember = false;
-
-    /**
      * The session used by the guard.
      *
      * @var \Illuminate\Contracts\Session\Session
@@ -273,7 +266,7 @@ class HubIdentityGuard implements Guard
 
         if (! is_null($this->recaller())) {
             $this->getCookieJar()->queue($this->getCookieJar()
-                                             ->forget($this->getRecallerName()));
+             ->forget($this->getRecallerName()));
         }
     }
 
@@ -318,8 +311,6 @@ class HubIdentityGuard implements Guard
         $this->user = $user;
 
         $this->loggedOut = false;
-
-        //$this->fireAuthenticatedEvent($user);
 
         return $this;
     }

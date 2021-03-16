@@ -2,7 +2,6 @@
 
 namespace HubIdentity\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
