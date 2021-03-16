@@ -35,19 +35,19 @@ class HubIdentityUserProvider implements UserProvider
     }
 
     public function retrieveByToken($identifier, $token) {
-
+        // Not used
     }
 
     public function updateRememberToken(Authenticatable $user, $token) {
-
+        // Not used
     }
 
     public function retrieveByCredentials(array $credentials) {
-
+        // Not used
     }
 
     public function validateCredentials(Authenticatable $user, array $credentials) {
-
+        // Not used
     }
 }
 

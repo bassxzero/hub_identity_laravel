@@ -2,14 +2,25 @@
 
 namespace HubIdentity\Providers;
 
+use HubIdentity\Providers\HubIdentityUserProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
-use HubIdentity\Providers\HubIdentityUserProvider;
 use HubIdentity\Middleware\HubIdentityAuthenticate;
 use HubIdentity\Services\HubIdentityGuard;
 
 class HubIdentityServiceProvider extends ServiceProvider
 {
+
+    /**
+     * All of the container singletons that should be registered.
+     *
+     * @var array
+     */
+    public $singletons = [
+        HubIdentityUserProvider::class => HubIdentityUserProvider::class
+    ];
+
+
     /**
      * Register any application services.
      *
@@ -17,7 +28,7 @@ class HubIdentityServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
     }
 
     /**
@@ -38,15 +49,15 @@ class HubIdentityServiceProvider extends ServiceProvider
         $this->app['router']->aliasMiddleware('auth.hubidentity', HubIdentityAuthenticate::class);
 
 
-        Auth::provider('hub-identity-users', function ($app, array $config) {
-            return new HubIdentityUserProvider();
+        Auth::provider('hubidentity-user', function ($app, array $config) {
+            return app()->make(HubIdentityUserProvider::class);
         });
 
-        Auth::extend('hub-identity', function ($app, $name, array $config) {
+        Auth::extend('hubidentity', function ($app, $name, array $config) {
             return $app->make(
                 HubIdentityGuard::class,
                 [
-                    'name' => 'hubidentity',
+                    'name' => $name,
                     'provider' => app()->make(HubIdentityUserProvider::class)
                 ]
             );
