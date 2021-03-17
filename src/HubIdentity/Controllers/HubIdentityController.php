@@ -22,6 +22,8 @@ class HubIdentityController extends BaseController
      */
     public function sessionCreate(Request $request)
     {
+        $session =  session();
+        
         $inputs = $request->all();
 
         $userToken = $inputs['user_token'] ?? null;
@@ -45,8 +47,10 @@ class HubIdentityController extends BaseController
         }
 
         Auth::guard('hubidentity')->loginUsingId($body_json['uid']);
+        
+        $path = $session->pull('url.intended', '/');
 
-        return response()->redirectTo('/');
+        return response()->redirectTo($path);        
     }
 
     /**
