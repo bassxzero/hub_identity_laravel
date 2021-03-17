@@ -37,6 +37,11 @@ php artisan vendor:publish --provider="HubIdentity\Providers\HubIdentityServiceP
 Add the `hubidentity` guard to your `auth.conf`
 
 ```php
+'defaults' => [
+    'guard' => 'hubidentity',
+    'passwords' => 'users',
+],
+
 'guards' => [        
         'hubidentity' => [
             'driver' => 'hubidentity',
