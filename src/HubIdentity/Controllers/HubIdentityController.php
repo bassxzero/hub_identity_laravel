@@ -22,7 +22,7 @@ class HubIdentityController extends BaseController
      */
     public function sessionCreate(Request $request)
     {
-        $session =  session();
+        $session = session();
         
         $inputs = $request->all();
 
