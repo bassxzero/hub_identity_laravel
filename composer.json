@@ -1,6 +1,6 @@
 {
     "name": "bassxzero/hub_identity_laravel",
-    "description": "HubIdentity Support for Laravel 8.x",
+    "description": "HubIdentity Support for Laravel 6+",
     "authors": [
         {
             "name": "Tyler Scott",
@@ -8,7 +8,8 @@
         }
     ],
     "require": {
-        "laravel/framework": "^7.0|^8.0"
+        "laravel/framework": "^6.0|^7.0|^8.0",
+        "guzzlehttp/guzzle": "^6.0|^7.0"
     },
     "autoload": {
         "psr-4": {

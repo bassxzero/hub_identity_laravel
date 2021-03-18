@@ -6,8 +6,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
 use Exception;
+use GuzzleHttp\Client;
 
 class HubIdentityController extends BaseController
 {
@@ -23,7 +23,7 @@ class HubIdentityController extends BaseController
     public function sessionCreate(Request $request)
     {
         $session = session();
-        
+
         $inputs = $request->all();
 
         $userToken = $inputs['user_token'] ?? null;
@@ -34,23 +34,29 @@ class HubIdentityController extends BaseController
 
         $url = config('hubidentity.url') . '/api/v1/current_user/' . $userToken;
 
-        $response = Http::withHeaders(
-            [
+        $client = new Client();
+
+        $response = $client->request('GET', $url, [
+            'headers' => [
                 'x-api-key' => config('hubidentity.private_key')
             ]
-        )->get($url);
+        ]);
 
-        $body_json = $response->json();
+        $body = $response->getBody();
+
+        $string_body = $body->getContents();
+
+        $body_json = json_decode($string_body, true);
 
         if(empty($body_json['uid'])) {
             throw new Exception('Invalid HubIdentity response');
         }
 
         Auth::guard('hubidentity')->loginUsingId($body_json['uid']);
-        
+
         $path = $session->pull('url.intended', '/');
 
-        return response()->redirectTo($path);        
+        return response()->redirectTo($path);
     }
 
     /**
